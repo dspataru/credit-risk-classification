@@ -43,7 +43,7 @@ classifier = LogisticRegression(solver = 'lbfgs',
                                 random_state = 1)
 classifier.fit(X_train, y_train)
 ```
-and the model was fit to the training data. Logistic regression is a fundamental and widely used machine learning technique due to its simplicity, interpretability, and effectiveness in many real-world binary classification tasks. It is a type of regression analysis, but unlike linear regression, which is used for predicting continuous outcomes, logistic regression is specifically designed for predicting binary outcomes, such as "yes" or "no," "spam" or "not spam," "fraudulent" or "non-fraudulent," etc. In our case, we want to predict "high-risk" or "healthy" loans. Below is a visual representation of the logistic regression model and how it uses the sigmoid function to transform the output of a linear equation into a value between 0 and 1 (resource: https://datahacker.rs/004-machine-learning-logistic-regression-model/).
+and the model was fit to the training data. Logistic regression is a fundamental and widely used machine learning technique due to its simplicity, interpretability, and effectiveness in many real-world binary classification tasks. It is a type of regression analysis, but unlike linear regression, which is used for predicting continuous outcomes, logistic regression is specifically designed for predicting binary outcomes, such as "yes" or "no," "spam" or "not spam," "fraudulent" or "non-fraudulent," etc. In our case, we want to predict "high-risk" or "healthy" loans. Below is a visual representation of the logistic regression model and how it uses the sigmoid function to transform the output of a linear equation into a value between 0 and 1 (resource: [logistic regression](https://datahacker.rs/004-machine-learning-logistic-regression-model/)).
 
 ![logistic_regression_image](https://github.com/dspataru/credit-risk-classification/assets/61765352/9b73af8f-f71c-476d-8f41-7f076a792a2c)
 
@@ -55,12 +55,28 @@ Let's go back to the dataset. We saw that the number of healthy loans in the dat
 
 The are various strategies that can be employed to address the issues that can arise from imbalanced datasets, including evaluation metrics, collecting more data, and resampling techniques. One of the ways to assess a model's performance is by checking the accuracy. Relying solely on accuracy as a performance metric for machine learning models can be problematic and misleading for several reasons, especially when dealing with imbalanced datasets or specific use cases. High accuracy can give a false impression of a model's performance, even if it performs poorly on the class of interest. It may not reflect the model's ability to make accurate predictions for the specific task it was designed for. Instead, there are other evaluation metrics that can be used such as precision, recall, F1-score, ROC AUC, or PR AUC that account for class imbalance, rather than relying solely on accuracy.
 
-In this project, we explore resampling techniques and compare accuracy and evaluation metrics.
+In this project, we use the `RandomOverSampler` module from the imbalanced-learn library to resample the data and compare the accuracy and evaluation metrics between the logistic regression model performance on imbalanced vs balanced data.
+
+To evaluate the performance of the models, the following was calculated:
+* The balanced accuracy score of the model.
+* Confusion matrix.
+* Classification report.
+
+The `balanced_accuracy_score` function from the `sklearn.metrics` library is used to compute the balanced accuracy of a classification model. It is a performance metric designed to address the issues associated with imbalanced datasets. Balanced accuracy takes into account the class imbalance by providing an accuracy measure that gives equal weight to each class, making it particularly useful when evaluating models on imbalanced datasets. Below is the process of how computing the `balanced_accuracy_score` works:
+1. It computes the true positives (TP), which is class 1, and true negatives (TN), which is class 0, separately.
+2. It then calculates the sensitivity for each class, also known as recall, which measures the model's ability to correctly classify positive instances.
+3. Next, the class weights are computed: balanced accuracy assigns weights to each class based on their proportion in the dataset. The weights are equal to the number of true negatives for each class divided by the total number of true negatives.
+4. Lastly, the balanced accuracy is computed as the arithmetic mean of the sensitivities (recall) for each class, weighted by the class weights.
+
+The result is a score between 0 and 1 where 1 is perfect classification and 0 is "random" classification.
+
+A confusion matrix is a tabular representation of the performance of a classification model, showing the number of correct and incorrect predictions made by the model on a set of data. It is a useful tool for assessing the performance of a classification algorithm and understanding the types of errors it makes. Below is a visual representation of the confusion matrix (resource: [confusion matrix](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2Fanalytics-vidhya%2Fwhat-is-a-confusion-matrix-d1c0f8feda5&psig=AOvVaw3Qh913ADCKpFHEscuXdvjP&ust=1698978354179000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCPDZ_N-hpIIDFQAAAAAdAAAAABAE)). 
+
+![image](https://github.com/dspataru/credit-risk-classification/assets/61765352/ea5ef816-984d-4d15-af31-b72f11b02af6)
+
+The last method that is used in this project to evaluate the model's performance is the `classification_report`. The classification report will provide a summary of precision, recall, F1-score, and support for each class, along with average scores. Precision is a measure of what proportion of positive identifications was correct. A model that has no false positives has a precision of 1.0. Recall attempts to answer the question of what proportion of actual positives was identified correctly. A model that produces no false negatives has a recall of 1.0. The F1-score is the harmonic mean of precision and recall. It provides a balance between these two metrics, helping to gauge the trade-off between false positives and false negatives.
 
 ## Results
-
-To evaluate the prediction results
-
 
 Using bulleted lists, describe the balanced accuracy scores and the precision and recall scores of all machine learning models.
 
