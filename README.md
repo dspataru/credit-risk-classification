@@ -86,9 +86,9 @@ A prediction was made with the logistic regression model using the testing data.
 ![model_predicitions_OG_data](https://github.com/dspataru/credit-risk-classification/assets/61765352/2e796d9b-ad93-432e-bc36-96be74baacef)
 
   * Balanced accuracy score: 0.9520479254722232
-  * Confusion matrix: ```python [[18663   102]
- [   56   563]] ```
+  * Confusion matrix: ```[[18663   102] [   56   563]] ```
   * Classification report:
+    
 ![imbalanced_classification_report](https://github.com/dspataru/credit-risk-classification/assets/61765352/b72c29e5-2ea8-4701-9d2c-c0eceed3b813)
 
 The balanced accuracy score was calculated for the model to be ~95%. The balanced accuracy in binary classification problems is used to deal with imbalanced dataset. In the case of our model, the dataset has a much higher number of healthy loan status data points than high-risk loan data points, thus we use the balanced accuracy score from the sklearn library vs the accuracy score. 
@@ -104,9 +104,9 @@ To balance the dataset, `RandomOverSampler` (ROS) was imported from the `imblear
 
 Similar to the previous model, the ROS model's performance was evaulated using the same metrics.
   * Balanced accuracy score: 0.9938093272802311
-  * Confusion matrix: ```python [[18649   116]
- [    4   615]] ```
+  * Confusion matrix: ``` [[18649   116] [    4   615]] ```
   * Classification report:
+    
 ![ROS_classification_report](https://github.com/dspataru/credit-risk-classification/assets/61765352/6fa3ab86-70a8-4832-a5f6-26a7c1a8efd7)
 
 
