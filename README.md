@@ -16,7 +16,7 @@ Machine learning (ML) models can be powerful tools for classifying high-risk and
 However, it's important to note that the performance and fairness of these models are contingent on the quality and representativeness of the training data, as well as ethical considerations to avoid bias and discrimination in lending decisions. At the end of the day, ML models are not a replacement for human judgement, but rather, a valuable tool to enhance decision-making processes and pair well with expert knowledge and experience.
 
 #### Key Words
-Machine learning, classification models, linear regression, 
+Machine learning, classification models, logistic regression, credit risk classification, accuracy score, balanced accuracy score, confusion matrix, classification report, model performance, training set, testing set, train test split, sklearn, pandas, numpy, pathlib
 
 ## Overview of the Analysis
 
@@ -80,20 +80,44 @@ The last method that is used in this project to evaluate the model's performance
 
 Using bulleted lists, describe the balanced accuracy scores and the precision and recall scores of all machine learning models.
 
-* Machine Learning Model 1:
-  * Description of Model 1 Accuracy, Precision, and Recall scores.
+* Machine Learning Model 1: Unbalanced Dataset
 A prediction was made with the logistic regression model using the testing data. Below is a snapshot of the first 15 predictions the model made using the testing data.
 
 ![model_predicitions_OG_data](https://github.com/dspataru/credit-risk-classification/assets/61765352/2e796d9b-ad93-432e-bc36-96be74baacef)
 
+  * Balanced accuracy score: 0.9520479254722232
+  * Confusion matrix: ```python [[18663   102]
+ [   56   563]] ```
+  * Classification report:
+![imbalanced_classification_report](https://github.com/dspataru/credit-risk-classification/assets/61765352/b72c29e5-2ea8-4701-9d2c-c0eceed3b813)
 
-* Machine Learning Model 2:
-  * Description of Model 2 Accuracy, Precision, and Recall scores.
+The balanced accuracy score was calculated for the model to be ~95%. The balanced accuracy in binary classification problems is used to deal with imbalanced dataset. In the case of our model, the dataset has a much higher number of healthy loan status data points than high-risk loan data points, thus we use the balanced accuracy score from the sklearn library vs the accuracy score. 
+
+Based on the classification report, the model has a high precision for predicting the healthy loans. In the case of the regression model, the precision is 1.0, which means that when it predicts the loan_status to be healthy, it is correct 100% of the time. On the same note, when our model predicts the loan status to be high-risk, it is correct 85% of the time. 
+
+In terms of recall, both healthy and high-risk recall scores are high. The model is able to correctly identify 91% of high-risk loans, and 99% of healthy loans.
+    
+* Machine Learning Model 2: Balanced Dataset
+To balance the dataset, `RandomOverSampler` (ROS) was imported from the `imblearn.over_sampling` library. The original training data was fit to the random oversampler model to generate a new dataset. After applying this function, the data was split into an even 56,271 for class 0 and 56,271 for class 1. A logistic regression model was fit to the new training data and the original testing data was used to make predictions as seen below.
+
+![ROS_predictions](https://github.com/dspataru/credit-risk-classification/assets/61765352/58a38648-a4dc-499b-b9cf-3ef3d94704c1)
+
+Similar to the previous model, the ROS model's performance was evaulated using the same metrics.
+  * Balanced accuracy score: 0.9938093272802311
+  * Confusion matrix: ```python [[18649   116]
+ [    4   615]] ```
+  * Classification report:
+![ROS_classification_report](https://github.com/dspataru/credit-risk-classification/assets/61765352/6fa3ab86-70a8-4832-a5f6-26a7c1a8efd7)
+
 
 ## Summary
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+![classification_report_comparison](https://github.com/dspataru/credit-risk-classification/assets/61765352/c7d119b5-6517-4639-a5c8-689867580f30)
 
-If you do not recommend any of the models, please justify your reasoning.
+When using the oversampled data, the logistic regression model has a higher recall for the high-risk loans, resulting in a better f1-score. The precision for the high-risk classification has decreased slightly. The model has an almost 100% precision and recall for both the healthy and high-risk loan data points. The phenomenon that is seen where recall improves and precision decreases is due to the nature of oversampling and the trade-offs involved in managing class imbalance. 
+
+Why does this happen? The goal of over-sampling is to ensure that the model has enough data for the minority class to learn its underlying patterns and improve its ability to correctly classify those instances. By oversampling the minority class, you increase the number of TP predictions because the model now has more examples of the minority class to learn from. As a result, recall tends to improve. Recall is calculated as TP / (TP + FN). Precision may decrease because the model now has more data points to make false positive predictions. When the minority class is oversampled, there is a higher chance the model incorrectly classifies some minority class examples, leading to more FP. Precision is calculated as TP / (TP + FP), so an increase in FP while TP remains relatively constant or grows can lower the precision score.
+
+This trade-off between precision and recall is a common phenomenon in imbalanced classification. By oversampling the minority class, you increase the model's ability to detect the minority class (improved recall), but this comes at the cost of potentially misclassifying more majority class instances as the minority class (reduced precision) as we see in our comparison.
+
+In the case of the application of the model, it is objectively more important to have a higher recall, as you want to reduce the risk of failing to detect a TP (class 1). For companies that are providing loans to borrowers, it would be important to maximize recall because missing a positive case could have serious consequences. For this reason, Machine Learning Model 2: Balanced Dataset is the preferred classification model for the application.  
