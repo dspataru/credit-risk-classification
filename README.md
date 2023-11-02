@@ -1,7 +1,7 @@
-# credit-risk-classification
+# Credit Risk Classification
 Train and evaluating a model to classify loan risk
 
-![image](https://github.com/dspataru/credit-risk-classification/assets/61765352/2697c809-7838-4fab-8129-b2a630a3c0cb)
+![header_image](https://github.com/dspataru/credit-risk-classification/assets/61765352/2697c809-7838-4fab-8129-b2a630a3c0cb)
 
 ## Table of Contents
 
@@ -34,19 +34,41 @@ The loan status is the target variable the model is trying to classify. A value 
 
 The csv file converted into a pandas dataframe using pd.read_csv. The data was checked for NaN values and no missing entries were found. The data was split into a features dataframe and a labels array, where the features are items 1-7 as detailed above, and loan status contains the labels for the features. The number of healthy loans in the dataset is 75,036 and the number of high risk loans in the dataset is 2,500.
 
-Before creating the ML model, the data is split into training and testing sets using train_test_split from the sklearn library. 
+Before creating the ML model, the data is split into training and testing sets using train_test_split from the sklearn library. A random state of 1 was assigned to the function. The size of training set is (58152, 7) which contains 75% of the data from the dataset, and the size of testing set is (19384, 7) which contains the remaining 25% of the data. 
 
+A logistic regression classifier model was used from the sklearn.linear_model library with the following parameters: 
+``` python
+classifier = LogisticRegression(solver = 'lbfgs',
+                                max_iter = 200,
+                                random_state = 1)
+classifier.fit(X_train, y_train)
+```
+and the model was fit to the training data. Logistic regression is a fundamental and widely used machine learning technique due to its simplicity, interpretability, and effectiveness in many real-world binary classification tasks. It is a type of regression analysis, but unlike linear regression, which is used for predicting continuous outcomes, logistic regression is specifically designed for predicting binary outcomes, such as "yes" or "no," "spam" or "not spam," "fraudulent" or "non-fraudulent," etc. In our case, we want to predict "high-risk" or "healthy" loans. Below is a visual representation of the logistic regression model and how it uses the sigmoid function to transform the output of a linear equation into a value between 0 and 1 (resource: https://datahacker.rs/004-machine-learning-logistic-regression-model/).
 
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any resampling method).
+![logistic_regression_image](https://github.com/dspataru/credit-risk-classification/assets/61765352/9b73af8f-f71c-476d-8f41-7f076a792a2c)
+
+Let's go back to the dataset. We saw that the number of healthy loans in the dataset is 75,036 and the number of high risk loans in the dataset is 2,500. Based on this information, there is a high number of healthy loans for the model to learn from, but a relatively small number of high risk loans. The data used to train the model is imbalanced. Having an imbalanced dataset can cause a number of issues, including:
+1. The model to be biased towards the majority class, which is healthy loans in this case.
+2. It can cause poor generaliziation of new data where it could potentially overfit the majority class, resulting in poor performance of the minority class.
+3. Can cause inaccurate evaluation.
+4. Potential increase of false negatives; instances where the model incorrectly predicts the negative class when it should have predicted the positive class. This may have severe consquences in particular applications and industries.
+
+The are various strategies that can be employed to address the issues that can arise from imbalanced datasets, including evaluation metrics, collecting more data, and resampling techniques. One of the ways to assess a model's performance is by checking the accuracy. Relying solely on accuracy as a performance metric for machine learning models can be problematic and misleading for several reasons, especially when dealing with imbalanced datasets or specific use cases. High accuracy can give a false impression of a model's performance, even if it performs poorly on the class of interest. It may not reflect the model's ability to make accurate predictions for the specific task it was designed for. Instead, there are other evaluation metrics that can be used such as precision, recall, F1-score, ROC AUC, or PR AUC that account for class imbalance, rather than relying solely on accuracy.
+
+In this project, we explore resampling techniques and compare accuracy and evaluation metrics.
 
 ## Results
+
+To evaluate the prediction results
+
 
 Using bulleted lists, describe the balanced accuracy scores and the precision and recall scores of all machine learning models.
 
 * Machine Learning Model 1:
   * Description of Model 1 Accuracy, Precision, and Recall scores.
+A prediction was made with the logistic regression model using the testing data. Below is a snapshot of the first 15 predictions the model made using the testing data.
 
+![model_predicitions_OG_data](https://github.com/dspataru/credit-risk-classification/assets/61765352/2e796d9b-ad93-432e-bc36-96be74baacef)
 
 
 * Machine Learning Model 2:
