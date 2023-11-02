@@ -103,7 +103,7 @@ To balance the dataset, `RandomOverSampler` (ROS) was imported from the `imblear
 ![ROS_predictions](https://github.com/dspataru/credit-risk-classification/assets/61765352/58a38648-a4dc-499b-b9cf-3ef3d94704c1)
 
 Similar to the previous model, the ROS model's performance was evaulated using the same metrics.
-  * Balanced accuracy score: 0.9938093272802311
+  * Accuracy score: 0.9938093272802311
   * Confusion matrix: ``` [[18649   116] [    4   615]] ```
   * Classification report:
     
