@@ -4,16 +4,16 @@ Train and evaluating a model to classify loan risk
 ![header_image](https://github.com/dspataru/credit-risk-classification/assets/61765352/2697c809-7838-4fab-8129-b2a630a3c0cb)
 
 ## Table of Contents
+* [Background](https://github.com/dspataru/credit-risk-classification/blob/main/README.md#background)
+* [Overview of the Analysis](https://github.com/dspataru/credit-risk-classification/blob/main/README.md#overview-of-the-analysis)
+* [Results](https://github.com/dspataru/credit-risk-classification/blob/main/README.md#results)
+* [Summary](https://github.com/dspataru/credit-risk-classification/blob/main/README.md#summary)
 
 ## Background
 
-Loan risk, also known as credit risk, refers to the potential for a borrower to fail to meet their obligations under a loan agreement. When a lender provides funds to a borrower, there is always a degree of uncertainty regarding whether the borrower will repay the loan as agreed. Loan risk analysis is the process of evaluating this risk to make informed lending decisions. The purpose of performing a loan risk analysis is to assess the likelihood that a borrower will default on their loan and the potential impact of that default on the lender. 
+Loan risk, also known as credit risk, refers to the potential for a borrower to fail to meet their obligations under a loan agreement. When a lender provides funds to a borrower, there is always a degree of uncertainty regarding whether the borrower will repay the loan as agreed. Loan risk analysis is the process of evaluating this risk to make informed lending decisions. The purpose of performing a loan risk analysis is to assess the likelihood that a borrower will default on their loan and the potential impact of that default on the lender. By understanding and managing loan risk, lenders can maintain a healthy and profitable loan portfolio while borrowers can access the financing they need.
 
-The goal of loan risk analysis is to strike a balance between providing access to credit for borrowers while managing the lender's exposure to risk. Lenders aim to minimize the likelihood of loan defaults by making informed decisions and using risk mitigation strategies. By understanding and managing loan risk, lenders can maintain a healthy and profitable loan portfolio while borrowers can access the financing they need.
-
-Machine learning (ML) models can be powerful tools for classifying high-risk and low-risk loans by analyzing various data points and patterns. ML models can process and analysis large amounts of data and find complex patterns and relationships that may not be obvious through traditional or manual analysis. The models are flexible in the sense that they can be customized and update to meet business needs, and can continuously evolve over time from learning the new data.
-
-However, it's important to note that the performance and fairness of these models are contingent on the quality and representativeness of the training data, as well as ethical considerations to avoid bias and discrimination in lending decisions. At the end of the day, ML models are not a replacement for human judgement, but rather, a valuable tool to enhance decision-making processes and pair well with expert knowledge and experience.
+Machine learning (ML) models can be powerful tools for classifying high-risk and low-risk loans by analyzing various data points and patterns. ML models can process and analysis large amounts of data and find complex patterns and relationships that may not be obvious through traditional or manual analysis. The models are flexible in the sense that they can be customized and update to meet business needs, and can continuously evolve over time from learning the new data. However, it's important to note that the performance and fairness of these models are contingent on the quality and representativeness of the training data.
 
 #### Key Words
 Machine learning, classification models, logistic regression, credit risk classification, accuracy score, balanced accuracy score, confusion matrix, classification report, model performance, training set, testing set, train test split, sklearn, pandas, numpy, pathlib
